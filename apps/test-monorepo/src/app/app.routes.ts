@@ -6,8 +6,8 @@ export const appRoutes: Route[] = [
     redirectTo: "home",
     pathMatch: "full"
   },
-  // {
-  //   path: "home",
-  //   loadComponent:
-  // }
+  {
+    path: "home",
+    loadComponent: () => import("@users/home").then(c => c.HomeComponent)
+  }
 ];
