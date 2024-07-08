@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@users/layout": ["libs/users/core/ui/layout/src/index.ts"]
+      "@users/core/ui/layout": ["libs/users/core/ui/layout/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
