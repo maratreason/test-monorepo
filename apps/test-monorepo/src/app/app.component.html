@@ -1,1 +1,18 @@
-<app-nx-welcome></app-nx-welcome> <router-outlet></router-outlet>
+<h1>Hello World</h1>
+<ng-container *ngIf="users$ | async as users">
+  <div style="margin: 20px; padding: 30px; border: 1px solid #ccc;">
+    <h3>Users</h3>
+    <pre>
+      {{users | json}}
+    </pre>
+  </div>
+</ng-container>
+<ng-container *ngIf="todos$ | async as todos">
+  <div style="margin: 20px; padding: 30px; border: 1px solid #ccc;">
+    <h3>Todos</h3>
+    <pre>
+      {{todos | json}}
+    </pre>
+  </div>
+</ng-container>
+<router-outlet></router-outlet>

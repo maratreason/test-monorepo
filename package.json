@@ -2,7 +2,9 @@
   "name": "@ang/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve test-monorepo -o"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.0.0",
@@ -13,7 +15,7 @@
     "@angular/platform-browser": "~18.0.0",
     "@angular/platform-browser-dynamic": "~18.0.0",
     "@angular/router": "~18.0.0",
-    "@nx/angular": "19.4.1",
+    "@nx/angular": "^19.5.0-canary.20240706-4ae16b3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -31,7 +33,7 @@
     "@nx/eslint": "19.4.1",
     "@nx/eslint-plugin": "19.4.1",
     "@nx/jest": "19.4.1",
-    "@nx/js": "19.4.1",
+    "@nx/js": "19.5.0-canary.20240706-4ae16b3",
     "@nx/workspace": "19.4.1",
     "@schematics/angular": "~18.0.0",
     "@swc-node/register": "~1.9.1",
