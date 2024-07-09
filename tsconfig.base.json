@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/index.ts"],
-      "@users/home": ["libs/users/home/src/index.ts"]
+      "@users/core/http": ["libs/core/http/src/index.ts"],
+      "@users/home": ["libs/users/home/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

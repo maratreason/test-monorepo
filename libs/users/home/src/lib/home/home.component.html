@@ -1,1 +1,8 @@
-<p>home works!</p>
+<ng-container *ngIf="users$ | async as users">
+  <div style="margin: 20px; padding: 30px; border: 1px solid #ccc;">
+    <h3>Users</h3>
+    <pre>
+      {{users | json}}
+    </pre>
+  </div>
+</ng-container>
