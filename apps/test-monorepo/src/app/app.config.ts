@@ -18,4 +18,4 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 
-// Остановился на уроке 9.
+// Остановился на уроке 10.
