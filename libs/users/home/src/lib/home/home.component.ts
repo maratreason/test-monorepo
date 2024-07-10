@@ -1,6 +1,5 @@
-import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
+import {ChangeDetectionStrategy, Component} from "@angular/core";
 import {AsyncPipe, CommonModule, JsonPipe, NgIf} from "@angular/common";
-import {ApiService} from "@users/core/http";
 import {UsersListContrainerComponent} from "@users/feature-users-list";
 
 @Component({
@@ -12,7 +11,5 @@ import {UsersListContrainerComponent} from "@users/feature-users-list";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  private readonly apiService = inject(ApiService);
 
-  public readonly users$ = this.apiService.get("/users");
 }

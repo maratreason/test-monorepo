@@ -12,13 +12,12 @@ import {provideStoreDevtools} from "@ngrx/store-devtools";
 import {API_URL} from "@users/core/http";
 import {appRoutes} from "./app.routes";
 import {environment} from "../environments/environment.development";
-import {UsersEffects, UsersFacade} from "@users/data-access";
-import * as fromUsers from "../../../../libs/users/users/data-access/src/lib/+state/users.reducer";
+import {UsersFacade, USERS_FEATURE_KEY, usersReducer, usersEffects} from "@users/data-access";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(UsersEffects),
-    provideState(fromUsers.USERS_FEATURE_KEY, fromUsers.usersReducer),
+    provideEffects(usersEffects),
+    provideState(USERS_FEATURE_KEY, usersReducer),
     UsersFacade,
     provideStoreDevtools({
       logOnly: !isDevMode(),
@@ -35,8 +34,6 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 
-// Остановился на уроке 12. 20:00.
-// Нужно социальное одобрение. Например:
-// - Марат, как ты во всём этом разбираешься? Ты пишешь код. Это так круто!
-// Для изучения NGRX нужно создать тестовый проект, прямо в либе users. И там использовать все фишки NGRX.
+// Остановился на уроке 12. 1:20:00.
+// Создать тестовый проект, прямо в либе users. И там использовать все фишки NGRX.
 // Entity, ngrx-store, ngrx-data, ngrx-component, ngrx-signals, ngrx-operators. Создать отдельный data-access и использовать его.
