@@ -7,9 +7,9 @@ import {UsersEntity} from "./users.models";
 export const USERS_FEATURE_KEY = "users";
 
 export interface UsersState extends EntityState<UsersEntity> {
-  selectedId?: string | number; // which Users record has been selected
-  loaded: boolean; // has the Users list been loaded
-  error?: string | null; // last known error (if any)
+  selectedId?: string | number;
+  loaded: boolean;
+  error?: string | null;
 }
 
 export interface UsersPartialState {
