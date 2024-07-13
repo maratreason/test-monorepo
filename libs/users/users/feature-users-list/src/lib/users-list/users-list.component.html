@@ -1,18 +1,17 @@
-<p>users-list UI works!</p>
-
-<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
-  <div>Загрузка данных...</div>
-</ng-container>
-
-<ng-template #loadingResult>
-  <ng-container *ngIf="vm.status === 'loaded'; else error">
-    <!-- <pre> -->
-      {{vm | json}}
-    <!-- </pre> -->
+<div class="users-list">
+  <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+    <div>Загрузка данных...</div>
   </ng-container>
-</ng-template>
 
-<ng-template #error>
-  <div style="color: red;">Ошибка загрузки...</div>
-</ng-template>
+  <ng-template #loadingResult>
+    <ng-container *ngIf="vm.status === 'loaded'; else error">
+      @for(user of vm.users; track user.name ) {
+        <users-card [user]="user" />
+      }
+    </ng-container>
+  </ng-template>
 
+  <ng-template #error>
+    <div style="color: red">Ошибка загрузки...</div>
+  </ng-template>
+</div>

@@ -1,1 +1,10 @@
-<p>users-card works!</p>
+<mat-card class="card" appearance="outlined">
+  <mat-card-content class="card-content">
+    <h5>{{user.name}}</h5>
+    <p>{{user.email}}</p>
+  </mat-card-content>
+  <mat-card-actions class="users-card-buttons">
+    <button mat-raised-button>Редактировать</button>
+    <button mat-raised-button color="warn">Удалить</button>
+  </mat-card-actions>
+</mat-card>
