@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {UsersListComponent} from "../users-list/users-list.component";
-import {UsersFacade} from "@users/data-access";
 import {UsersListContainerStore} from "./users-list-container.store";
 
 @Component({
@@ -16,4 +15,5 @@ import {UsersListContainerStore} from "./users-list-container.store";
 export class UsersListContrainerComponent {
   private readonly componentStore$ = inject(UsersListContainerStore);
   public readonly users$ = this.componentStore$.users$;
+  public readonly status$ = this.componentStore$.status$;
 }

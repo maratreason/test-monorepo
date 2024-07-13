@@ -18,7 +18,25 @@ const initialState: UsersListState = {
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
   public readonly users$ = this.select(state => state.users);
-  // private readonly status$ = this.usersFacade.status$;
+  public readonly status$ = this.usersFacade.status$;
+
+  // alternate use this.select(multithreads) function:
+  /*
+  public readonly status$ = this.select( <= the same: public readonly status$ = this.usersFacade.status$;
+    this.usersFacade.status$,
+    (status) => status
+  );
+  public readonly status$ = this.select(
+    this.usersFacade.status$,
+    status => status
+  );
+  public readonly status$ = this.select(
+    this.users$,
+    this.usersFacade.status$,
+    (users, status) => status
+  );
+  public readonly status$ = this.select(({users}) => users)
+  */
 
   constructor() {
     super(initialState);

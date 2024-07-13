@@ -4,7 +4,7 @@ import {switchMap, catchError, of, map} from "rxjs";
 import * as UsersActions from "./users.actions";
 import * as UsersFeature from "./users.reducer";
 import {ApiService} from "@users/core/http";
-import {UsersEntity} from "./users.models";
+import {UsersEntity} from "./users.entity";
 import {UsersDTO} from "../users-dto.model";
 import {usersDTOAdapter} from "../users-dto.adapter";
 

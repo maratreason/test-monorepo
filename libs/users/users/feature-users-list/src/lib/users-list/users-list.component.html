@@ -1,6 +1,18 @@
-<p>users-list works!</p>
-<ng-container>
-  <pre>
-    {{vm | json}}
-  </pre>
+<p>users-list UI works!</p>
+
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <div>Загрузка данных...</div>
 </ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <!-- <pre> -->
+      {{vm | json}}
+    <!-- </pre> -->
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div style="color: red;">Ошибка загрузки...</div>
+</ng-template>
+
