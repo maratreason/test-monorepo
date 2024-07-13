@@ -8,6 +8,7 @@ import {provideHttpClient} from "@angular/common/http";
 import {provideStore, provideState} from "@ngrx/store";
 import {provideEffects} from "@ngrx/effects";
 import {provideStoreDevtools} from "@ngrx/store-devtools";
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 
 import {API_URL} from "@users/core/http";
 import {appRoutes} from "./app.routes";
@@ -40,9 +41,10 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75,
       connectInZone: true,
     }),
+    provideAnimationsAsync(),
   ],
 };
 
-// Остановился на уроке 14.
+// Остановился на уроке 15.
 // Создать тестовый проект, прямо в либе users. И там использовать все фишки NGRX.
 // Entity, ngrx-store, ngrx-data, ngrx-component, ngrx-signals, ngrx-operators. Создать отдельный data-access и использовать его.
