@@ -6,7 +6,7 @@
   <ng-template #loadingResult>
     <ng-container *ngIf="vm.status === 'loaded'; else error">
       @for(user of vm.users; track user.name ) {
-        <users-card [user]="user" />
+        <users-card [user]="user" (deleteUser)="onDeleteUser(user)" />
       }
     </ng-container>
   </ng-template>

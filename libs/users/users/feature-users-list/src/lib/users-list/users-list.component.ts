@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {UsersListVM} from "./users-list-vm";
 import {UsersCardComponent} from "../users-card/users-card.component";
+import {UsersVM} from "../users-vm";
 
 @Component({
   selector: "users-list-ui",
@@ -14,4 +15,10 @@ import {UsersCardComponent} from "../users-card/users-card.component";
 export class UsersListComponent {
   @Input({required: true})
   vm!: UsersListVM;
+
+  @Output() deleteUser = new EventEmitter();
+
+  onDeleteUser(user: UsersVM) {
+    this.deleteUser.emit(user);
+  }
 }

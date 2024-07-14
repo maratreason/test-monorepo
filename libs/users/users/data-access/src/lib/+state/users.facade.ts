@@ -13,7 +13,11 @@ export class UsersFacade {
   allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
 
-  init() {
+  public init() {
     this.store.dispatch(UsersActions.initUsers());
+  }
+
+  public deleteUser(id: number) {
+    this.store.dispatch(UsersActions.deleteUser({id}));
   }
 }

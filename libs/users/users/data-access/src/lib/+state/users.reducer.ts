@@ -40,7 +40,16 @@ const reducer = createReducer(
     ...state,
     status: "error" as const,
     error,
-  }))
+  })),
+
+  on(UsersActions.deleteUserSuccess, (state, {id}) => {
+    return usersAdapter.removeOne(id, {...state});
+  }),
+  on(UsersActions.deleteUserFailure, (state, {error}) => ({
+    ...state,
+    status: "error" as const,
+    error,
+  })),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
