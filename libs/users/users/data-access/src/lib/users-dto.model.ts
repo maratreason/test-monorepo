@@ -29,3 +29,13 @@ export type UsersDTO = DeepReadonly<{
   website: string;
   company: Company;
 }>;
+
+export type CreateUserDTO = DeepReadonly<{
+  id?: number | null;
+  name: string;
+  username?: string;
+  email: string;
+  address?: Address;
+  // city?: string;
+  // role?: Role;
+}>

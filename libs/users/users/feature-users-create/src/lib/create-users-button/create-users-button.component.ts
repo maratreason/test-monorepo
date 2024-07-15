@@ -37,12 +37,12 @@ export class CreateUsersButtonComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
         if (result) {
-          // const newUserData: CreateUserDTO = {
-          //   name: result.name,
-          //   email: result.email,
-          // };
+          const newUserData: any /*CreateUserDTO*/ = {
+            name: result.name,
+            email: result.email,
+          };
 
-          // this.usersFacade.addUser(newUserData);
+          this.usersFacade.addUser(newUserData);
         }
       });
   }

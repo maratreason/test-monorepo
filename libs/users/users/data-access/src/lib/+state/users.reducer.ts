@@ -50,6 +50,10 @@ const reducer = createReducer(
     status: "error" as const,
     error,
   })),
+
+  on(UsersActions.addUserSuccess, (state, {user}) =>
+    usersAdapter.addOne({...user}, {...state})
+  )
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

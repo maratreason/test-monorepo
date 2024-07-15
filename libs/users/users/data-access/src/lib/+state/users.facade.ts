@@ -4,6 +4,7 @@ import {select, Store, Action} from "@ngrx/store";
 import * as UsersActions from "./users.actions";
 import * as UsersFeature from "./users.reducer";
 import * as UsersSelectors from "./users.selectors";
+import {CreateUserDTO} from "../users-dto.model";
 
 @Injectable()
 export class UsersFacade {
@@ -19,5 +20,9 @@ export class UsersFacade {
 
   public deleteUser(id: number) {
     this.store.dispatch(UsersActions.deleteUser({id}));
+  }
+
+  public addUser(user: CreateUserDTO) {
+    this.store.dispatch(UsersActions.addUser({user}));
   }
 }
