@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@posts/data-access": ["libs/users/test/posts/data-access/src/index.ts"],
       "@users/core/http": ["libs/core/http/src/index.ts"],
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/index.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
