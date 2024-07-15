@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@
 import {CommonModule} from "@angular/common";
 import {UsersListVM} from "./users-list-vm";
 import {UsersCardComponent} from "../users-card/users-card.component";
-import {UsersVM} from "../users-vm";
+import {UsersVM} from "../../../../users-vm";
 
 @Component({
   selector: "users-list-ui",

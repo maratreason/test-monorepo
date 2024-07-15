@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@
 import {CommonModule} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
-import {UsersVM} from "../users-vm";
+import {UsersVM} from "../../../../users-vm";
 
 @Component({
   selector: "users-card",

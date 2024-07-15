@@ -6,7 +6,7 @@ import {tap} from "rxjs";
 import {UsersEntity, UsersFacade} from "@users/data-access";
 import {DeepReadonly} from "@users/core/utils";
 import {UsersVM} from "@users/feature-users-list";
-import {usersVMAdapter} from "../users-vm.adapter";
+import {usersVMAdapter} from "../../../../users-vm.adapter";
 import {UsersDeleteDialogComponent} from "../users-delete-dialog/users-delete-dialog.component";
 
 type UsersListState = DeepReadonly<{
