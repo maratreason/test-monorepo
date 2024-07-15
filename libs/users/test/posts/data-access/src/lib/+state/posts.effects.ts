@@ -1,21 +1,30 @@
-import {Injectable, inject} from "@angular/core";
+import {inject} from "@angular/core";
 import {createEffect, Actions, ofType} from "@ngrx/effects";
-import {switchMap, catchError, of} from "rxjs";
+import {switchMap, catchError, of, map} from "rxjs";
+import {ApiService} from "@users/core/http";
 import * as PostsActions from "./posts.actions";
-import * as PostsFeature from "./posts.reducer";
+import {PostsDTO} from "../posts-dto.model";
 
-@Injectable()
-export class PostsEffects {
-  private actions$ = inject(Actions);
 
-  init$ = createEffect(() =>
-    this.actions$.pipe(
+export const postsEffects = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    actions$.subscribe(console.log);
+
+    return actions$.pipe(
       ofType(PostsActions.initPosts),
-      switchMap(() => of(PostsActions.loadPostsSuccess({posts: []}))),
-      catchError((error) => {
-        console.error("Error", error);
-        return of(PostsActions.loadPostsFailure({error}));
-      })
-    )
-  );
-}
+      switchMap(() =>
+        apiService.get<PostsDTO[]>("/users/1/posts/").pipe(
+          map((posts) => PostsActions.loadPostsSuccess({posts})),
+          catchError((error) => {
+            console.error("Error", error);
+            return of(PostsActions.loadPostsFailure({error}));
+          })
+        )
+      )
+    );
+  },
+  {functional: true}
+);

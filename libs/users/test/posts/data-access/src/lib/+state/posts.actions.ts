@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {PostsEntity} from "./posts.models";
+import {PostsEntity} from "./posts.entity";
 
 export const initPosts = createAction("[Posts Page] Init");
 

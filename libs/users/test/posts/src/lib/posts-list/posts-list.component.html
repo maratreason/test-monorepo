@@ -1,1 +1,6 @@
 <p>posts-list works!</p>
+
+<ng-container *ngIf="(posts$ | async) as posts">
+  {{posts | json }}
+</ng-container>
+

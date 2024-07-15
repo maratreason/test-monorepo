@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component} from "@angular/core";
+import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {PostsFacade} from "../../../data-access/src";
 
 @Component({
   selector: "lib-posts-list",
@@ -9,4 +10,7 @@ import {CommonModule} from "@angular/common";
   styleUrl: "./posts-list.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostsListComponent {}
+export class PostsListComponent {
+  private readonly postsFacade = inject(PostsFacade);
+  public readonly posts$ = this.postsFacade.allPosts$;
+}
