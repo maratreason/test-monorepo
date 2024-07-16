@@ -1,33 +1,12 @@
 import {DeepReadonly} from "@users/core/utils";
 
-export interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
-}
-
-export interface Geo {
-  lat: string;
-  lng: string;
-}
-
-export interface Company {
-  name: string;
-  catchPhrase: string;
-  bs: string;
-}
-
 export type UsersDTO = DeepReadonly<{
   id: number;
+  created_at?: number;
   name: string;
-  username: string;
   email: string;
-  address: Address;
-  phone: string;
-  website: string;
-  company: Company;
+  username: string;
+  city: string;
 }>;
 
 export type CreateUserDTO = DeepReadonly<{
@@ -35,7 +14,7 @@ export type CreateUserDTO = DeepReadonly<{
   name: string;
   username?: string;
   email: string;
-  address?: Address;
+  address?: string;
   // city?: string;
   // role?: Role;
-}>
+}>;

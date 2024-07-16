@@ -19,13 +19,16 @@ import {
   usersReducer,
   usersEffects,
 } from "@users/data-access";
+import {POSTS_FEATURE_KEY, postsEffects, PostsFacade, postsReducer} from "@posts/data-access";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(usersEffects),
-    provideState(USERS_FEATURE_KEY, usersReducer),
+    provideEffects(usersEffects, postsEffects),
     UsersFacade,
-    provideStore(),
+    provideStore({
+      [USERS_FEATURE_KEY]: usersReducer,
+      [POSTS_FEATURE_KEY]: postsReducer,
+    }),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(appRoutes),
     provideHttpClient(),
@@ -45,6 +48,6 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 
-// Остановился на уроке 16.
+// Остановился на уроке 17.
 // Создать тестовый проект, прямо в либе users. И там использовать все фишки NGRX.
 // Entity, ngrx-store, ngrx-data, ngrx-component, ngrx-signals, ngrx-operators. Создать отдельный data-access и использовать его.

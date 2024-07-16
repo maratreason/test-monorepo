@@ -8,22 +8,15 @@ export type UsersDTOAdapter = {
 
 export const usersDTOAdapter: UsersDTOAdapter = {
   DTOtoEntity(dto) {
-    const {geo, ...otherAddressFields} = dto.address;
+    const {created_at, ...otherFields} = dto;
 
     return {
-      ...dto,
-      address: {
-        ...otherAddressFields,
-      }
+      ...otherFields,
     };
   },
   entityToDTO(entity) {
     return {
       ...entity,
-      address: {
-        ...entity.address,
-        geo: {lat: "", lng: ""},
-      }
     };
   },
 };
