@@ -29,18 +29,16 @@ import {MatInputModule} from "@angular/material/input";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUsersDialogComponent {
-  public formGroup: FormGroup;
-  private formBuilder = inject(FormBuilder);
-  public dialogRef = inject(MatDialogRef<CreateUsersDialogComponent>);
+  private readonly formBuilder = inject(FormBuilder);
+  public readonly dialogRef = inject(MatDialogRef<CreateUsersDialogComponent>);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {name: string; email: string}
-  ) {
-    this.formGroup = this.formBuilder.group({
-      name: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-    });
-  }
+  public formGroup: FormGroup = this.formBuilder.group({
+    name: ["", Validators.required],
+    email: ["", [Validators.required, Validators.email]],
+    username: ["", Validators.required],
+  });
+
+  public data: {name: string; email: string} = inject(MAT_DIALOG_DATA);
 
   cancel(): void {
     this.dialogRef.close();
@@ -50,6 +48,7 @@ export class CreateUsersDialogComponent {
     if (this.formGroup.valid) {
       const formData = {
         name: this.formGroup.value.name,
+        username: this.formGroup.value.username,
         email: this.formGroup.value.email.trim().toLowerCase(),
       };
       this.dialogRef.close(formData);

@@ -23,6 +23,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 export class CreateUsersButtonComponent {
   private name!: string;
   private email!: string;
+  private username!: string;
   public dialog = inject(MatDialog);
   private readonly usersFacade = inject(UsersFacade);
   private readonly destroyRef = inject(DestroyRef);
@@ -30,7 +31,7 @@ export class CreateUsersButtonComponent {
   openAddUserDialog(): void {
     const dialogRef: MatDialogRef<CreateUsersDialogComponent> =
       this.dialog.open(CreateUsersDialogComponent, {
-        data: {name: this.name, email: this.email},
+        data: {name: this.name, email: this.username},
       });
     dialogRef
       .afterClosed()
@@ -40,6 +41,7 @@ export class CreateUsersButtonComponent {
           const newUserData: any /*CreateUserDTO*/ = {
             name: result.name,
             email: result.email,
+            username: result.username,
           };
 
           this.usersFacade.addUser(newUserData);

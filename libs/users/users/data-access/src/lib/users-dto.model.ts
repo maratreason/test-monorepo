@@ -12,9 +12,9 @@ export type UsersDTO = DeepReadonly<{
 export type CreateUserDTO = DeepReadonly<{
   id?: number | null;
   name: string;
-  username?: string;
   email: string;
-  address?: string;
-  // city?: string;
+  username?: string;
+  city?: string;
+  created_at?: number;
   // role?: Role;
 }>;
