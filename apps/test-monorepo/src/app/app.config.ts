@@ -19,7 +19,7 @@ import {
   usersReducer,
   usersEffects,
 } from "@users/data-access";
-import {POSTS_FEATURE_KEY, postsEffects, PostsFacade, postsReducer} from "@posts/data-access";
+import {POSTS_FEATURE_KEY, postsEffects, postsReducer} from "@posts/data-access";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -48,6 +48,6 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 
-// Остановился на уроке 17.
+// Остановился на уроке 18.
 // Создать тестовый проект, прямо в либе users. И там использовать все фишки NGRX.
 // Entity, ngrx-store, ngrx-data, ngrx-component, ngrx-signals, ngrx-operators. Создать отдельный data-access и использовать его.
