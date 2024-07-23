@@ -3,11 +3,12 @@ import {CommonModule} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {UsersVM} from "../../../../users-vm";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: "users-card",
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, RouterLink],
   templateUrl: "./users-card.component.html",
   styleUrl: "./users-card.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,

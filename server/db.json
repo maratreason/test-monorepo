@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {"id": "1", "title": "a title", "views": 100},
+    {"id": "2", "title": "another title", "views": 200},
+    {"id": "3", "title": "Learn Angular", "views": 150},
+    {"id": "4", "title": "Learn NGRX", "views": 170},
+    {"id": "5", "title": "Learn Signals", "views": 180}
+  ],
+  "comments": [
+    {"id": "1", "text": "a comment about post 1", "postId": "1"},
+    {"id": "2", "text": "another comment about post 1", "postId": "1"},
+    {"id": "3", "text": "comment to learn angular", "postId": "3"},
+    {"id": "4", "text": "comment to NGRX", "postId": "4"}
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

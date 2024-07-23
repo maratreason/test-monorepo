@@ -5,7 +5,7 @@ import {
 } from "@angular/core";
 import {provideRouter} from "@angular/router";
 import {provideHttpClient} from "@angular/common/http";
-import {provideStore, provideState} from "@ngrx/store";
+import {provideStore} from "@ngrx/store";
 import {provideEffects} from "@ngrx/effects";
 import {provideStoreDevtools} from "@ngrx/store-devtools";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
@@ -19,16 +19,20 @@ import {
   usersReducer,
   usersEffects,
 } from "@users/data-access";
-import {POSTS_FEATURE_KEY, postsEffects, postsReducer} from "@posts/data-access";
+import {POSTS_FEATURE_KEY, postsEffects, PostsFacade, postsReducer} from "@posts/data-access";
+import {provideRouterStore, routerReducer} from "@ngrx/router-store";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(usersEffects, postsEffects),
     UsersFacade,
+    PostsFacade,
     provideStore({
       [USERS_FEATURE_KEY]: usersReducer,
       [POSTS_FEATURE_KEY]: postsReducer,
+      router: routerReducer,
     }),
+    provideRouterStore(),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(appRoutes),
     provideHttpClient(),
@@ -48,6 +52,6 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 
-// Остановился на уроке 18.
+// Остановился на уроке 18. 1:00:00
 // Создать тестовый проект, прямо в либе users. И там использовать все фишки NGRX.
 // Entity, ngrx-store, ngrx-data, ngrx-component, ngrx-signals, ngrx-operators. Создать отдельный data-access и использовать его.

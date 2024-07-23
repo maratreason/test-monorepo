@@ -53,7 +53,11 @@ const reducer = createReducer(
 
   on(UsersActions.addUserSuccess, (state, {user}) =>
     usersAdapter.addOne({...user}, {...state})
-  )
+  ),
+
+  on(UsersActions.editUserSuccess, (state, {userData}) =>
+    usersAdapter.updateOne({id: userData.id, changes: userData}, state)
+  ),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
