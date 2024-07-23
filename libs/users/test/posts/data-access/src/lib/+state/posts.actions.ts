@@ -1,5 +1,6 @@
-import {createAction, props} from "@ngrx/store";
+import {createAction, createActionGroup, props} from "@ngrx/store";
 import {PostsEntity} from "./posts.entity";
+import {IPost} from "./post.model";
 
 export const initPosts = createAction("[Posts Page] Init");
 
@@ -12,3 +13,19 @@ export const loadPostsFailure = createAction(
   "[Posts/API] Load Posts Failure",
   props<{error: any}>()
 );
+
+// NGRX
+export const PostsActions = createActionGroup({
+  source: 'Posts',
+  events: {
+    'Add Post': props<{ id: string }>(),
+    'Remove Post': props<{ id: string }>(),
+  },
+});
+
+export const PostsApiActions = createActionGroup({
+  source: 'Posts API',
+  events: {
+    'Load Posts List': props<{ posts: ReadonlyArray<IPost> }>(),
+  },
+});

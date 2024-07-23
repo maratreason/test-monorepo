@@ -13,6 +13,8 @@ export class PostsFacade {
   allPosts$ = this.store.pipe(select(PostsSelectors.selectAllPosts));
   selectedPosts$ = this.store.pipe(select(PostsSelectors.selectEntity));
 
+  posts$ = this.store.pipe(select(PostsSelectors.selectPosts));
+
   init() {
     this.store.dispatch(PostsActions.initPosts());
   }

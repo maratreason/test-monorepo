@@ -8,6 +8,7 @@ import {PostsDTO} from "../posts-dto.model";
 
 export const postsEffects = createEffect(
   () => {
+    console.log("posts effect")
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
 
@@ -16,7 +17,7 @@ export const postsEffects = createEffect(
     return actions$.pipe(
       ofType(PostsActions.initPosts),
       switchMap(() =>
-        apiService.get<PostsDTO[]>("/users/1/posts/").pipe(
+        apiService.get<any>("/posts").pipe(
           map((posts) => PostsActions.loadPostsSuccess({posts})),
           catchError((error) => {
             console.error("Error", error);

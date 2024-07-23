@@ -13,4 +13,8 @@ import {PostsFacade} from "../../../data-access/src";
 export class PostsListComponent {
   private readonly postsFacade = inject(PostsFacade);
   public readonly posts$ = this.postsFacade.allPosts$;
+
+  constructor() {
+    this.postsFacade.init();
+  }
 }

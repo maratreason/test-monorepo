@@ -1,5 +1,6 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {POSTS_FEATURE_KEY, PostsState, postsAdapter} from "./posts.reducer";
+import {IPost} from "./post.model";
 
 export const selectPostsState =
   createFeatureSelector<PostsState>(POSTS_FEATURE_KEY);
@@ -36,3 +37,5 @@ export const selectEntity = createSelector(
   selectSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
+
+export const selectPosts = createFeatureSelector<ReadonlyArray<IPost>>('posts');

@@ -3,6 +3,7 @@ import {createReducer, on, Action} from "@ngrx/store";
 
 import * as PostsActions from "./posts.actions";
 import {PostsEntity} from "./posts.entity";
+import {IPost} from "./post.model";
 
 export const POSTS_FEATURE_KEY = "posts";
 
@@ -12,6 +13,7 @@ export interface PostsState extends EntityState<PostsEntity> {
   selectedId?: string | number;
   status: PostsStatus;
   error: string | null;
+  posts: ReadonlyArray<IPost>;
 }
 
 export interface PostsPartialState {
@@ -22,6 +24,7 @@ export const postsAdapter: EntityAdapter<PostsEntity> =
   createEntityAdapter<PostsEntity>();
 
 export const initialPostsState: PostsState = postsAdapter.getInitialState({
+  posts: [],
   status: "init" as const,
   error: null,
 });
@@ -40,7 +43,7 @@ const reducer = createReducer(
     ...state,
     status: "error" as const,
     error,
-  }))
+  })),
 );
 
 export function postsReducer(state: PostsState | undefined, action: Action) {
