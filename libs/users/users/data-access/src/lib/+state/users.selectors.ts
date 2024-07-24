@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-// import {selectRouteParams} from "@users/data-access";
+import {selectRouteParams} from "@ang/data-access";
 import {USERS_FEATURE_KEY, UsersState, usersAdapter} from "./users.reducer";
 
 // Lookup the 'Users' feature state managed by NgRx
@@ -44,8 +44,8 @@ export const selectUserById = (id: number) => createSelector(
   (entities) => entities[id]
 );
 
-// export const selectOpenedUser = createSelector(
-//   selectRouteParams,
-//   selectUsersEntities,
-//   ({id}, entities) => entities[id] || null
-// );
+export const selectOpenedUser = createSelector(
+  selectRouteParams,
+  selectUsersEntities,
+  ({id}, entities) => entities[id] || null
+);

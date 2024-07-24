@@ -5,15 +5,18 @@
     </ng-container>
 
     <ng-template #result>
-      <!-- <ng-container *ngIf="currentUser$ | async as user; else notFound">
+      <ng-container *ngIf="currentUser$ | async as user; else notFound">
         <mat-card class="edit-user-card">
           <div class="close-button-container">
-            <button mat-icon-button aria-label="close dialog"
-            (click)="onCloseUser()"
+            <button
+              class="close-button"
+              mat-icon-button
+              aria-label="close dialog"
+              (click)="onCloseUser()"
             >
               <mat-icon>close</mat-icon>
             </button>
-            <h1 class="edit-user-title">Редактирование пользователя</h1>
+            <h3 class="edit-user-title">Редактирование пользователя</h3>
           </div>
 
           <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
@@ -62,7 +65,7 @@
 
           </form>
         </mat-card>
-      </ng-container> -->
+      </ng-container>
 
       <ng-template #notFound>
         <h3>Данный пользователь не найден</h3>

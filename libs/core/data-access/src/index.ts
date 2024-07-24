@@ -1,1 +1,1 @@
-export * from "./lib/core-data-access.module";
+export * from "./lib/router.selectors";

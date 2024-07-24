@@ -9,13 +9,12 @@ import {CreateUserDTO, UsersDTO} from "../users-dto.model";
 import {usersDTOAdapter} from "../users-dto.adapter";
 import {select, Store} from "@ngrx/store";
 import {selectUsersEntities} from "./users.selectors";
+import {selectRouteParams} from "@ang/data-access";
 
 export const usersEffects = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
-
-    actions$.subscribe(console.log);
 
     return actions$.pipe(
       ofType(UsersActions.initUsers),
@@ -111,6 +110,33 @@ export const editUser = createEffect(
           })
         )
       )
+    );
+  },
+  {functional: true}
+);
+
+export const loadUser = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(UsersActions.loadUser),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([, params]) => {
+        if (params["id"]) {
+          return apiService.get<UsersDTO>(`/users/${params["id"]}`).pipe(
+            map((userData) => UsersActions.loadUserSuccess({userData})),
+            catchError((error) => {
+              console.error("Error", error);
+              return of(UsersActions.loadUserFailure({error}));
+            })
+          );
+        }
+
+        return of(UsersActions.loadUserFailure({error: "User not found"}));
+      })
     );
   },
   {functional: true}

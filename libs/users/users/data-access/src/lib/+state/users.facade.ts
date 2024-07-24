@@ -16,7 +16,7 @@ export class UsersFacade {
   allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
 
-  // public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
+  public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
 
   public init() {
     this.store.dispatch(UsersActions.initUsers());
