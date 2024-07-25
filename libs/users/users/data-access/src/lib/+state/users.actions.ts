@@ -66,7 +66,7 @@ export const editUserFailed = createAction(
 
 // Load One User
 export const loadUser = createAction(
-  "[Users Detail] Load User"
+  "[Users/API] Load User"
 );
 
 export const loadUserSuccess = createAction(

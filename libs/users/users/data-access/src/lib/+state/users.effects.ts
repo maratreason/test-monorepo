@@ -96,13 +96,15 @@ export const editUser = createEffect(
           ...dtoUser,
           name: editUserPayload.userData.name,
           email: editUserPayload.userData.email,
+          username: editUserPayload.userData.username,
+          city: editUserPayload.userData.city,
         };
 
         return dtoToUpdateUser;
       }),
 
-      switchMap((user: UsersDTO) =>
-        apiService.post<UsersDTO, UsersDTO>(`/users/${user.id}`, user).pipe(
+      switchMap((user: CreateUserDTO) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => UsersActions.editUserSuccess({userData})),
           catchError((error) => {
             console.log("Error", error);

@@ -46,17 +46,21 @@ export class UsersDetailCardComponent {
 
   public readonly loadingStatus$ = this.usersFacade.status$;
 
-  @Input({required: true})
+  public readonly userId!: number;
+  public user!: CreateUserDTO;
+
+  // @Input({required: true})
   public readonly currentUser$: Observable<UsersEntity | null> =
     this.usersFacade.openedUser$.pipe(
       tap((user) => {
         if (!user) {
           this.usersFacade.loadUser();
+        } else {
+          this.user = user;
+          this.loadForm(this.user);
         }
       })
     );
-  public userId!: number;
-  public user!: any;
 
   @Input() editMode: boolean = true;
 
@@ -68,29 +72,31 @@ export class UsersDetailCardComponent {
 
   ngOnInit(): void {
     this.usersFacade.getUserFromStore(this.userId);
-    console.log("this.user", this.user);
+  }
 
+  loadForm(user: CreateUserDTO) {
     this.formBuilder = new FormBuilder();
     this.formGroup = this.formBuilder.group({
       name: new FormControl(
-        {value: this.user?.name, disabled: !this.editMode},
+        {value: user?.name, disabled: !this.editMode},
         [Validators.required]
       ),
       email: new FormControl(
-        {value: this.user?.email, disabled: !this.editMode},
+        {value: user?.email, disabled: !this.editMode},
         [Validators.required, Validators.email]
       ),
       username: new FormControl({
-        value: this.user?.username,
+        value: user?.username,
         disabled: !this.editMode,
       }),
-      city: new FormControl({value: this.user?.city, disabled: !this.editMode}),
+      city: new FormControl({value: user?.city, disabled: !this.editMode}),
     });
+
     this.formGroup.patchValue({
-      name: this.user?.name,
-      email: this.user?.email,
-      username: this.user?.username,
-      city: this.user?.city,
+      name: user?.name,
+      email: user?.email,
+      username: user?.username,
+      city: user?.city,
     });
   }
 

@@ -53,7 +53,7 @@
               <mat-card-actions class="edit-user-btns-container">
                 <button mat-raised-button type="submit" color="primary" [disabled]="formGroup.invalid"
                   class="edit-user-button">Сохранить</button>
-                <button mat-stroked-button type="button" color="primary" class="edit-user-button">Отмена</button>
+                <button mat-stroked-button type="button" color="primary" class="edit-user-button" (click)="onCloseUser()">Отмена</button>
               </mat-card-actions>
             </ng-template>
 

@@ -5,7 +5,7 @@ import {
 } from "@angular/core";
 import {provideRouter} from "@angular/router";
 import {provideHttpClient} from "@angular/common/http";
-import {provideStore} from "@ngrx/store";
+import {provideState, provideStore} from "@ngrx/store";
 import {provideEffects} from "@ngrx/effects";
 import {provideStoreDevtools} from "@ngrx/store-devtools";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
@@ -28,11 +28,10 @@ export const appConfig: ApplicationConfig = {
     UsersFacade,
     PostsFacade,
     provideStore({
+      router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [POSTS_FEATURE_KEY]: postsReducer,
-      router: routerReducer,
     }),
-    provideRouterStore(),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(appRoutes),
     provideHttpClient(),
@@ -48,10 +47,11 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75,
       connectInZone: true,
     }),
+    provideRouterStore(),
     provideAnimationsAsync(),
   ],
 };
 
-// Остановился на уроке 18. 1:00:00
+// Остановился на уроке 20.
 // Создать тестовый проект, прямо в либе users. И там использовать все фишки NGRX.
 // Entity, ngrx-store, ngrx-data, ngrx-component, ngrx-signals, ngrx-operators. Создать отдельный data-access и использовать его.
