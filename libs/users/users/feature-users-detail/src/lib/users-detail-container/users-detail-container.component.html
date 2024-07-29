@@ -1,1 +1,7 @@
-<p>users-detail-container works!</p>
+<ng-container *ngrxLet="{user: user$, status: status$, editMode: editMode$} as vm">
+  <ng-container *ngIf="vm.status === 'loading'">
+    <div>Загрузка...</div>
+  </ng-container>
+  <detail-users-card [vm]="vm" (editUser)="onEditUser($event)" (closeUser)="onCloseUser()" />
+</ng-container>
+<ng-template #nothing> </ng-template>

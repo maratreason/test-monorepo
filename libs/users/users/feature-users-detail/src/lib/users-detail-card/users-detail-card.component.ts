@@ -9,7 +9,6 @@ import {
 import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
 import {UsersEntity, UsersFacade} from "@users/data-access";
-import {Observable, tap} from "rxjs";
 import {
   FormBuilder,
   FormControl,
@@ -23,6 +22,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {UsersDetailVM} from "../users-detail-vm";
 
 @Component({
   selector: "detail-users-card",
@@ -41,68 +41,69 @@ import {MatButtonModule} from "@angular/material/button";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersDetailCardComponent {
+  public formGroup!: FormGroup;
+
+  private _vm: UsersDetailVM = {editMode: false, user: null, status: "init"};
+  get vm() {
+    return this._vm;
+  }
+
+  @Input({required: true})
+  set vm(vm: UsersDetailVM) {
+    this._vm = vm;
+    if(!this.formGroup) {
+      this.formGroup = new FormBuilder().group({
+        name: new FormControl(
+          {value: vm.user?.name, disabled: !vm.editMode},
+          [Validators.required]
+        ),
+        email: new FormControl(
+          {value: vm.user?.email, disabled: !vm.editMode},
+          [Validators.required, Validators.email]
+        ),
+        username: new FormControl({
+          value: vm.user?.username,
+          disabled: !vm.editMode,
+        }),
+        city: new FormControl({
+          value: vm.user?.city,
+          disabled: !vm.editMode,
+        }),
+      });
+    }
+
+    if (vm.user) {
+      this.formGroup.patchValue({
+        name: vm.user.name,
+        email: vm.user.email,
+        username: vm.user.username,
+        city: vm.user.city,
+      });
+    }
+
+    if (vm.editMode) {
+      this.formGroup.enable();
+    } else {
+      this.formGroup.disable();
+    }
+  }
+
+  @Output() editUser = new EventEmitter();
+  @Output() closeUser = new EventEmitter();
+  @Output() userData = new EventEmitter<UsersEntity>();
+
   private readonly router = inject(Router);
   private readonly usersFacade = inject(UsersFacade);
-
-  public readonly loadingStatus$ = this.usersFacade.status$;
-
   public readonly userId!: number;
-  public user!: CreateUserDTO;
-
-  // @Input({required: true})
-  public readonly currentUser$: Observable<UsersEntity | null> =
-    this.usersFacade.openedUser$.pipe(
-      tap((user) => {
-        if (!user) {
-          this.usersFacade.loadUser();
-        } else {
-          this.user = user;
-          this.loadForm(this.user);
-        }
-      })
-    );
-
-  @Input() editMode: boolean = true;
-
-  @Output() editUser = new EventEmitter<UsersEntity>();
-  @Output() closeUser = new EventEmitter();
-
-  public formGroup!: FormGroup;
-  private formBuilder!: FormBuilder;
-
-  ngOnInit(): void {
-    this.usersFacade.getUserFromStore(this.userId);
-  }
-
-  loadForm(user: CreateUserDTO) {
-    this.formBuilder = new FormBuilder();
-    this.formGroup = this.formBuilder.group({
-      name: new FormControl(
-        {value: user?.name, disabled: !this.editMode},
-        [Validators.required]
-      ),
-      email: new FormControl(
-        {value: user?.email, disabled: !this.editMode},
-        [Validators.required, Validators.email]
-      ),
-      username: new FormControl({
-        value: user?.username,
-        disabled: !this.editMode,
-      }),
-      city: new FormControl({value: user?.city, disabled: !this.editMode}),
-    });
-
-    this.formGroup.patchValue({
-      name: user?.name,
-      email: user?.email,
-      username: user?.username,
-      city: user?.city,
-    });
-  }
 
   submit(): void {
     this.onEditUser(this.formGroup.value);
-    this.editUser.emit(this.formGroup.value);
+    this.editUser.emit({
+      name: this.formGroup.value.name || "",
+      username: this.formGroup.value.username || "",
+      city: this.formGroup.value.city || "",
+      email: this.formGroup.value.email || "",
+    });
   }
 
   onCloseUser() {
@@ -110,7 +111,15 @@ export class UsersDetailCardComponent {
   }
 
   public onEditUser(userData: CreateUserDTO) {
-    this.usersFacade.editUser(userData, this.user?.id || 0);
+    this.usersFacade.editUser(userData, this.vm.user?.id || 0);
     this.router.navigate(["/home"]);
+  }
+
+  public onOpenEditMode() {
+
+  }
+
+  public onDeleteUser() {
+
   }
 }

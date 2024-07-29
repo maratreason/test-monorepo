@@ -1,8 +1,3 @@
-<ng-container *ngIf="users$ | async as users">
-  <ng-container *ngIf="status$ | async as status">
-    <users-list-ui
-      [vm]="{users, status}"
-      (deleteUser)="onDeleteUser($event)"
-    />
-  </ng-container>
+<ng-container *ngrxLet="{users: users$, status: status$} as vm">
+  <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" />
 </ng-container>

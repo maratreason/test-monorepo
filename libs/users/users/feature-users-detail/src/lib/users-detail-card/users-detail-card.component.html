@@ -1,22 +1,36 @@
 <div class="edit-user-container">
-  <ng-container *ngIf="loadingStatus$ | async as status">
-    <ng-container *ngIf="status === 'loading'; else result">
+  <ng-container *ngIf="vm.status">
+    <ng-container *ngIf="vm.status === 'loading'; else result">
       <div>Загрузка...</div>
     </ng-container>
-
     <ng-template #result>
-      <ng-container *ngIf="currentUser$ | async as user; else notFound">
+      <ng-container *ngIf="vm.user; else notFound">
         <mat-card class="edit-user-card">
           <div class="close-button-container">
-            <button
-              class="close-button"
-              mat-icon-button
-              aria-label="close dialog"
-              (click)="onCloseUser()"
-            >
-              <mat-icon>close</mat-icon>
+            <button mat-icon-button aria-label="close dialog" color="accent" (click)="onCloseUser()">
+              <mat-icon>arrow_back</mat-icon>
             </button>
-            <h3 class="edit-user-title">Редактирование пользователя</h3>
+            <button
+              mat-icon-button
+              type="button"
+              color="accent"
+              class="edit-user-button"
+              *ngIf="!vm.editMode"
+              (click)="onOpenEditMode()"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              type="button"
+              color="accent"
+              class="edit-user-button"
+              *ngIf="vm.editMode"
+              (click)="onDeleteUser()"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <h3 class="edit-user-title">{{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}</h3>
           </div>
 
           <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
@@ -48,7 +62,7 @@
               </mat-form-field>
 
             </div>
-            <ng-container *ngTemplateOutlet="editMode ? saveTemplate : editTemplate"></ng-container>
+            <ng-container *ngTemplateOutlet="vm.editMode ? saveTemplate : editTemplate"></ng-container>
             <ng-template #saveTemplate>
               <mat-card-actions class="edit-user-btns-container">
                 <button mat-raised-button type="submit" color="primary" [disabled]="formGroup.invalid"
@@ -72,7 +86,7 @@
       </ng-template>
     </ng-template>
 
-    <ng-container *ngIf="status === 'error'">
+    <ng-container *ngIf="vm.status === 'error'">
       <div style="color: red;">Ошибка</div>
     </ng-container>
   </ng-container>

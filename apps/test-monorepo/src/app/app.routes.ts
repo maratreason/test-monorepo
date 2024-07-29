@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: "users/:id",
-    loadComponent: () => import("@users/feature-users-detail").then((c) => c.UsersDetailCardComponent),
+    loadComponent: () => import("@users/feature-users-detail").then((c) => c.UsersDetailContainerComponent),
   },
   {
     path: "posts",

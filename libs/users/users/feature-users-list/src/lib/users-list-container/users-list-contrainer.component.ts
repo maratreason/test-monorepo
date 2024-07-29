@@ -3,11 +3,12 @@ import {CommonModule} from "@angular/common";
 import {UsersListComponent} from "../users-list/users-list.component";
 import {UsersListContainerStore} from "./users-list-container.store";
 import {UsersVM} from "../../../../users-vm";
+import {LetDirective} from "@ngrx/component";
 
 @Component({
   selector: "users-list-container",
   standalone: true,
-  imports: [CommonModule, UsersListComponent],
+  imports: [CommonModule, UsersListComponent, LetDirective],
   templateUrl: "./users-list-contrainer.component.html",
   styleUrl: "./users-list-contrainer.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
